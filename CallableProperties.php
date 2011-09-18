@@ -3,7 +3,9 @@
 trait CallableProperties {
 
     public function __call($property, $args) {
-        if (!isset($this->$property) || !is_callable($this->$property)) {
+        if (!isset($this->$property)) {
+            return parent::__call($property, $args);
+        } elseif (!is_callable($this->$property)) {
             $message = __CLASS__ . '::' . $property . ' is not callable.';
             throw new BadMethodCallException($message);
         }
@@ -11,7 +13,9 @@ trait CallableProperties {
     }
 
     public static function __callStatic($property, $args) {
-        if (!isset(static::$property) || !is_callable(static::$property)) {
+        if (!isset(static::$property)) {
+            return parent::__callStatic($property, $args);
+        } elseif (!is_callable(static::$property)) {
             $message = __CLASS__ . '::' . $property . ' is not callable.';
             throw new BadMethodCallException($message);
         }
