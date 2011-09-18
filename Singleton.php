@@ -7,7 +7,7 @@ trait Singleton {
     }
 
     protected function __clone() {
-        //Not allowed
+        //Not allowed.
     }
 
     public static function getInstance(/* $arg1, $arg2, $argN */) {
